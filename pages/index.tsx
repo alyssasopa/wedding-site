@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import 'radar-sdk-js/dist/radar.css';
 import styles from '../styles/Home.module.css'
-import HamburgerMenu, { Links } from '../components/hamburger.tsx'
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"
 import Radar from 'radar-sdk-js';
@@ -24,13 +23,18 @@ const db = getFirestore();
 
 
 function InputForm() {
-  async function onSubmit(e) {
+  async function onSubmit(e: any) {
     e.preventDefault();
 
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const address = document.getElementById('address').value;
+    const firstName = (document.getElementById('firstName') as HTMLInputElement).value;
+    const lastName = (document.getElementById('lastName') as HTMLInputElement).value;
+    const address = (document.getElementById('address') as HTMLInputElement).value;
     const form = document.getElementById('inputForm');
+
+    if (!address) {
+      alert('Please fill out your address.');
+      return;
+    }
 
     const docId = firstName.concat(lastName);
     const docRef = doc(db, "guests", docId);
@@ -58,7 +62,7 @@ function InputForm() {
       form.appendChild(thanks);
     }
 
-    form.reset();
+    (form as HTMLFormElement).reset();
   }
 
   return (
@@ -94,7 +98,7 @@ function AddressInput() {
       placeholder: '',
       countryCode: 'US',
       onSelection: (address) => {
-        document.getElementById('address').value = address.formattedAddress;
+        (document.getElementById('address') as HTMLInputElement).value = address.formattedAddress;
       },
     });
 
