@@ -23,15 +23,14 @@
 }
 
 .title {
-/*  margin-top: 2vw;*/
-  margin-bottom: 2vw;
+  margin-bottom: .5vw;
 }
 
 .header {
   font-family: "Ysabeau SC", sans-serif;
   font-weight: 300;
   font-style: normal;
-  font-size: calc(50px + 2vw);
+  font-size: calc(70px + 2vw);
   text-align: center;
 /*  min-width: 0;*/
 }
@@ -53,7 +52,7 @@
   font-family: "Ysabeau SC", sans-serif;
   font-weight: 250;
   font-style: normal;
-  font-size: calc(8px + .6vw);
+  font-size: calc(10px + .6vw);
 }
 
 .form input {
@@ -93,13 +92,13 @@
 }
 
 .button {
-  font-size: calc(5px + 1vw);
+  font-size: calc(14px + .5vw);
   background-color: #dee1e2;
   border-radius: 2px;
   border-width: 0;
   width:auto;
-  min-width: calc(75px + 1.5vw);
-  height: calc(10px + 2.5vw);
+  min-width: calc(100px + 1vw);
+  height: calc(30px + 1vw);
   color: #333333;
   cursor: pointer;
   font-family: "Ysabeau SC", sans-serif;
@@ -128,6 +127,7 @@
 }
 
 .hr {
+  margin-top: 30px;
   width: 100%;
 }
 
@@ -136,9 +136,9 @@
   font-weight: 400;
   font-style: normal;
   position: relative;
-  font-size: calc(20px + 4vw);
+  font-size: calc(40px + 4vw);
   text-align: center;
-  margin-bottom: -1.8vw;
+  margin-bottom: -2.5vw;
 }
 
 .cursive {
@@ -146,7 +146,7 @@
   font-weight: 400;
   font-style: normal;
   position: relative;
-  font-size: calc(15px + 2vw);
+  font-size: calc(20px + 2vw);
 }
 
 .description {
@@ -357,6 +357,37 @@
     );
     background-clip: padding-box;
     backdrop-filter: blur(24px);
+  }
+
+  .caps {
+    font-family: "Ysabeau SC", sans-serif;
+    font-weight: 250;
+    font-style: normal;
+    font-size: calc(18px + .8vw);
+  }
+
+  .form {
+    font-family: "Ysabeau SC", sans-serif;
+    font-weight: 250;
+    font-style: normal;
+    font-size: calc(16px + .6vw);
+  }
+
+  .form input {
+    border-radius: 2px;
+    line-height: 1;
+    width: 100%;
+    border: solid #dee1e2;
+    color: rgb(14, 14, 16);
+    background: #dee1e2;
+    display: block;
+    font-size: calc(16px + .6vw);
+    outline-width: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-image: url('/user-solid.svg');
+    background-repeat: no-repeat;
+    maximum-scale: 1;
   }
 
   .description div {
