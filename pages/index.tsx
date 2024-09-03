@@ -64,6 +64,9 @@ function InputForm() {
       form.appendChild(thanks);
     }
 
+    // clear value of hidden address field so user cannot resubmit
+    // with what looks like a blank address input
+    (document.getElementById('address') as HTMLInputElement).value = '';
     (form as HTMLFormElement).reset();
   }
 
