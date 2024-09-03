@@ -73,7 +73,7 @@ function InputForm() {
   return (
     <>
       <div className={styles.topSpace}>
-        <div className={styles.caps}>
+        <div className={styles.caps} style={{textAlign: 'center'}}>
           <i>please provide your name and address below</i>
         </div>
         <div>
@@ -110,6 +110,7 @@ function AddressInput() {
       container: 'autocomplete',
       placeholder: '',
       countryCode: 'US',
+      layers: ['address'],
       onSelection: (address) => {
         (document.getElementById('address') as HTMLInputElement).value = address.formattedAddress;
       },
