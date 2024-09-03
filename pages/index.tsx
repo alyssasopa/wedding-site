@@ -140,6 +140,9 @@ function AddressInput() {
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>Save the Date</title>
+      </Head>
       <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.title}>
