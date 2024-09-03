@@ -2,94 +2,128 @@
 @import url('https://fonts.googleapis.com/css2?family=Ysabeau+SC:wght@1..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mr+De+Haviland&display=swap');
 
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
 .main {
   display: flex;
-  flex-direction: column;
+/*  flex-direction: column;*/
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
   min-height: 100vh;
   background-color: #ffff;
   color: #141413;
   font-family: 'Raleway', sans-serif;
+  min-width: 100vw;
 }
 
 .title {
-  margin-bottom: 10%;
+/*  margin-top: 2vw;*/
+  margin-bottom: 2vw;
 }
 
 .header {
   font-family: "Ysabeau SC", sans-serif;
   font-weight: 300;
   font-style: normal;
-  font-size: 4vw;
+  font-size: calc(30px + 3vw);
   text-align: center;
+/*  min-width: 0;*/
 }
 
 .container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  width: 95vw;
+  max-width: 500px;
 }
 
 .caps {
   font-family: "Ysabeau SC", sans-serif;
   font-weight: 250;
   font-style: normal;
-  font-size: 1.2vw;
+  font-size: calc(10px + .8vw);
 }
 
 .form {
   font-family: "Ysabeau SC", sans-serif;
   font-weight: 250;
   font-style: normal;
-  font-size: 1.2vw;
+  font-size: calc(8px + .6vw);
 }
 
 .form input {
   border-radius: 2px;
   line-height: 1;
   width: 100%;
-  padding: 5px 5px;
   border: solid #dee1e2;
   color: rgb(14, 14, 16);
   background: #dee1e2;
   display: block;
+  font-size: calc(8px + .6vw);
   outline-width: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-image: url('/user-solid.svg');
+  background-repeat: no-repeat;
+}
+
+.input::placeholder {
+  color: #b8b8b8;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 16px;
+}
+
+.radar-autocomplete-results-list {
+  font-size: 5px;
 }
 
 .button {
-  font-size: 1.2vw;
+  font-size: calc(5px + 1vw);
   background-color: #dee1e2;
   border-radius: 2px;
   border-width: 0;
-  width: 7vw;
-  height: 2.5vw;
+  width:auto;
+  min-width: calc(75px + 1.5vw);
+  height: calc(10px + 2.5vw);
   color: #333333;
   cursor: pointer;
   font-family: "Ysabeau SC", sans-serif;
-  ffont-size: 1.2vw;
   font-weight: 300;
   text-align: center;
   transition: all 200ms;
-  margin: auto;
+  margin: 0 auto;
   display: block;
 }
 
 .button span {
-    display: block;
-    text-align: center;
-    line-height: 1em;
+  display: block;
+  text-align: center;
+  line-height: 1em;
+  min-width: 20px;
 }
 
 .alignRight {
   margin-top: 3%;
   text-align: right;
+  min-width: 0;
 }
 
 .topSpace {
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .hr {
@@ -101,8 +135,9 @@
   font-weight: 400;
   font-style: normal;
   position: relative;
-  font-size: 4vw;
+  font-size: calc(15px + 4vw);
   text-align: center;
+  margin-bottom: -1.5vw;
 }
 
 .cursive {
@@ -110,7 +145,7 @@
   font-weight: 400;
   font-style: normal;
   position: relative;
-  font-size: 2vw;
+  font-size: calc(10px + 2vw);
 }
 
 .description {
@@ -122,22 +157,6 @@
   width: 100%;
   z-index: 2;
   font-family: var(--font-mono);
-}
-
-.description a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.description p {
-  position: relative;
-  margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
 }
 
 .code {
@@ -179,7 +198,6 @@
 }
 
 .center {
-  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -319,7 +337,6 @@
 
   .description p,
   .description div {
-    display: flex;
     justify-content: center;
     position: fixed;
     width: 100%;

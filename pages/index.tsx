@@ -7,6 +7,8 @@ import styles from '../styles/Home.module.css'
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"
 import Radar from 'radar-sdk-js';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faBuilding } from "@fortawesome/free-solid-svg-icons";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,9 +28,9 @@ function InputForm() {
   async function onSubmit(e: any) {
     e.preventDefault();
 
-    const firstName = (document.getElementById('firstName') as HTMLInputElement).value;
-    const lastName = (document.getElementById('lastName') as HTMLInputElement).value;
+    const fullName = (document.getElementById('fullName') as HTMLInputElement).value;
     const address = (document.getElementById('address') as HTMLInputElement).value;
+    const aptNumber = (document.getElementById('aptNumber') as HTMLInputElement).value;
     const form = document.getElementById('inputForm');
 
     if (!address) {
@@ -36,7 +38,7 @@ function InputForm() {
       return;
     }
 
-    const docId = firstName.concat(lastName);
+    const docId = fullName.toLowerCase().replace(/\s/g,'');
     const docRef = doc(db, "guests", docId);
     const docSnap = await getDoc(docRef);
 
@@ -47,9 +49,9 @@ function InputForm() {
           .concat(docSnap.data().address)
           .concat(". Do you wish to overwrite with a new address?"))) {
       await setDoc(docRef, {
-        firstName: firstName,
-        lastName: lastName,
-        address: address
+        fullName: fullName,
+        address: address,
+        aptNumber: aptNumber,
       });
       var thanks = document.getElementById('thanks');
       if (thanks !== null) {
@@ -71,17 +73,25 @@ function InputForm() {
         <div className={styles.caps}>
           <i>please provide your name and address below</i>
         </div>
-        <form id="inputForm" className={styles.form} onSubmit={onSubmit}>
-          <label htmlFor="firstName">first name:</label>
-          <input type="text" id="firstName" name="firstName" className={styles.input} required/>
-          <label htmlFor="lastName">last name:</label>
-          <input type="text" id="lastName" name="lastName" className={styles.input} required/>
-          <label htmlFor="address">address:</label>
-          <input type="hidden" id="address" name="address" className={styles.input} required/>
-          <AddressInput/>
-          <br></br>
-          <button type="submit" id="submit" value="submit" className={styles.button}><span>submit</span></button>
-        </form>
+        <div>
+          <form id="inputForm" className={styles.form} onSubmit={onSubmit}>
+            <label htmlFor="fullName">full name:</label>
+            <div className={styles.inputContainer}>
+              <FontAwesomeIcon icon={faUser} className={styles.inputIcon} style={{color: "#acbec8"}} />
+              <input type="text" id="fullName" name="fullName" className={styles.input} style={{ paddingLeft: '38px', paddingTop: '9px', paddingBottom: '9px' }} required/>
+            </div>
+            <label htmlFor="address">address:</label>
+            <input type="hidden" id="address" name="address" className={styles.input} required/>
+            <AddressInput/>
+            <label htmlFor="aptNumber">apt #:</label>
+            <div className={styles.inputContainer}>
+              <FontAwesomeIcon icon={faBuilding} className={styles.inputIcon} style={{color: "#acbec8"}} />
+              <input type="text" id="aptNumber" name="aptNumber" className={styles.input} style={{ paddingLeft: '38px', paddingTop: '9px', paddingBottom: '9px' }} placeholder='optional'/>
+            </div>
+            <br></br>
+            <button type="submit" id="submit" value="submit" className={styles.button}><span>submit</span></button>
+          </form>
+        </div>
       </div>
     </>
   )
@@ -96,6 +106,7 @@ function AddressInput() {
     autocompleteRef.current = Radar.ui.autocomplete({
       container: 'autocomplete',
       placeholder: '',
+      responsive: 'false',
       countryCode: 'US',
       onSelection: (address) => {
         (document.getElementById('address') as HTMLInputElement).value = address.formattedAddress;
