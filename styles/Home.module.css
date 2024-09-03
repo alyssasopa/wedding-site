@@ -30,8 +30,9 @@
   font-family: "Ysabeau SC", sans-serif;
   font-weight: 300;
   font-style: normal;
-  font-size: calc(70px + 2vw);
+  font-size: calc(60px + 2vw);
   text-align: center;
+  margin: -5px;
 /*  min-width: 0;*/
 }
 
@@ -55,6 +56,14 @@
   font-size: calc(10px + .6vw);
 }
 
+.trees {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
 .form input {
   border-radius: 2px;
   line-height: 1;
@@ -67,9 +76,6 @@
   outline-width: 0;
   padding-top: 5px;
   padding-bottom: 5px;
-  background-image: url('/user-solid.svg');
-  background-repeat: no-repeat;
-  maximum-scale: 1;
 }
 
 .input::placeholder {
@@ -127,7 +133,7 @@
 }
 
 .hr {
-  margin-top: 30px;
+  margin-top: 20px;
   width: 100%;
 }
 
@@ -138,7 +144,8 @@
   position: relative;
   font-size: calc(40px + 4vw);
   text-align: center;
-  margin-bottom: -2.5vw;
+  margin-bottom: calc(5px - 6vw);
+  margin-top: calc(5px - 4vw);
 }
 
 .cursive {
@@ -146,7 +153,7 @@
   font-weight: 400;
   font-style: normal;
   position: relative;
-  font-size: calc(20px + 2vw);
+  font-size: calc(25px + 2vw);
 }
 
 .description {
@@ -363,7 +370,7 @@
     font-family: "Ysabeau SC", sans-serif;
     font-weight: 250;
     font-style: normal;
-    font-size: calc(18px + .8vw);
+    font-size: calc(16px + .8vw);
   }
 
   .form {
@@ -385,9 +392,6 @@
     outline-width: 0;
     padding-top: 5px;
     padding-bottom: 5px;
-    background-image: url('/user-solid.svg');
-    background-repeat: no-repeat;
-    maximum-scale: 1;
   }
 
   .description div {

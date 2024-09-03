@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
@@ -9,6 +9,7 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"
 import Radar from 'radar-sdk-js';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBuilding } from "@fortawesome/free-solid-svg-icons";
+import trees from '../public/pine-trees.png'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,8 @@ const db = getFirestore();
 
 
 function InputForm() {
+  const [isSubmitted, setSubmitted] = useState(false);
+
   async function onSubmit(e: any) {
     e.preventDefault();
 
@@ -32,6 +35,7 @@ function InputForm() {
     const address = (document.getElementById('address') as HTMLInputElement).value;
     const aptNumber = (document.getElementById('aptNumber') as HTMLInputElement).value;
     const form = document.getElementById('inputForm');
+    const formDiv = document.getElementById('formDiv');
 
     if (!address) {
       alert('Please fill out your address.');
@@ -53,49 +57,56 @@ function InputForm() {
         address: address,
         aptNumber: aptNumber,
       });
-      var thanks = document.getElementById('thanks');
-      if (thanks !== null) {
-        thanks.outerHTML = '';
-      }
-      thanks = document.createElement('div');
-      thanks.id = 'thanks';
-      thanks.textContent = 'Thank you for your submission!';
-      thanks.style.textAlign = "center";
-      form.appendChild(thanks);
+      setSubmitted(true);
+    } else {
+      // clear value of hidden address field so user cannot resubmit
+      // with what looks like a blank address input
+      (document.getElementById('address') as HTMLInputElement).value = '';
+      (form as HTMLFormElement).reset();
     }
-
-    // clear value of hidden address field so user cannot resubmit
-    // with what looks like a blank address input
-    (document.getElementById('address') as HTMLInputElement).value = '';
-    (form as HTMLFormElement).reset();
   }
 
   return (
     <>
-      <div className={styles.topSpace}>
-        <div className={styles.caps} style={{textAlign: 'center'}}>
-          <i>please provide your name and address below</i>
-        </div>
-        <div>
-          <form id="inputForm" className={styles.form} onSubmit={onSubmit}>
-            <label htmlFor="fullName">full name:</label>
-            <div className={styles.inputContainer}>
-              <FontAwesomeIcon icon={faUser} className={styles.inputIcon} style={{color: "#acbec8"}} />
-              <input type="text" id="fullName" name="fullName" className={styles.input} style={{ paddingLeft: '38px', paddingTop: '9px', paddingBottom: '9px' }} required/>
+    {isSubmitted ? 
+      (
+        <>
+          <Image className={styles.trees} src={trees} width="70" height="60" alt=""/>
+          <div id="thanks" className={styles.caps} style={{textAlign: 'center'}}>
+            thank you for your submission!
+          </div>
+        </>
+      )
+      :
+      (
+        <>
+          <div className={styles.topSpace}>
+            <div id="formAsk" className={styles.caps} style={{textAlign: 'center'}}>
+              <i>please provide your name & address below</i>
             </div>
-            <label htmlFor="address">address:</label>
-            <input type="hidden" id="address" name="address" className={styles.input} required/>
-            <AddressInput/>
-            <label htmlFor="aptNumber">apt #:</label>
-            <div className={styles.inputContainer}>
-              <FontAwesomeIcon icon={faBuilding} className={styles.inputIcon} style={{color: "#acbec8"}} />
-              <input type="text" id="aptNumber" name="aptNumber" className={styles.input} style={{ paddingLeft: '38px', paddingTop: '9px', paddingBottom: '9px' }} placeholder='optional'/>
+            <div id="formDiv">
+              <form id="inputForm" className={styles.form} onSubmit={onSubmit}>
+                <label htmlFor="fullName">full name:</label>
+                <div className={styles.inputContainer}>
+                  <FontAwesomeIcon icon={faUser} className={styles.inputIcon} style={{color: "#acbec8"}} />
+                  <input type="text" id="fullName" name="fullName" className={styles.input} style={{ paddingLeft: '38px', paddingTop: '9px', paddingBottom: '9px' }} required/>
+                </div>
+                <label htmlFor="address">address:</label>
+                <input type="hidden" id="address" name="address" className={styles.input} required/>
+                <AddressInput/>
+                <label htmlFor="aptNumber">apt #:</label>
+                <div className={styles.inputContainer}>
+                  <FontAwesomeIcon icon={faBuilding} className={styles.inputIcon} style={{color: "#acbec8"}} />
+                  <input type="text" id="aptNumber" name="aptNumber" className={styles.input} style={{ paddingLeft: '38px', paddingTop: '9px', paddingBottom: '9px' }} placeholder='optional'/>
+                </div>
+                <br></br>
+                <button type="submit" id="submit" value="submit" className={styles.button}><span>submit</span></button>
+              </form>
             </div>
-            <br></br>
-            <button type="submit" id="submit" value="submit" className={styles.button}><span>submit</span></button>
-          </form>
-        </div>
-      </div>
+          </div>
+        </>
+      )
+    }
     </>
   )
 }
