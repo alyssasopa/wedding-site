@@ -106,7 +106,6 @@ function AddressInput() {
     autocompleteRef.current = Radar.ui.autocomplete({
       container: 'autocomplete',
       placeholder: '',
-      responsive: 'false',
       countryCode: 'US',
       onSelection: (address) => {
         (document.getElementById('address') as HTMLInputElement).value = address.formattedAddress;
