@@ -142,6 +142,10 @@ export default function Home() {
     <>
       <Head>
         <title>Save the Date</title>
+        <meta property="og:image" content="<generated>" />
+        <meta property="og:image:type" content="<generated>" />
+        <meta property="og:image:width" content="<generated>" />
+        <meta property="og:image:height" content="<generated>" />
       </Head>
       <main className={styles.main}>
         <div className={styles.container}>
