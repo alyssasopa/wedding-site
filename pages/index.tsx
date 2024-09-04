@@ -56,6 +56,7 @@ function InputForm() {
         fullName: fullName,
         address: address,
         aptNumber: aptNumber,
+        timestamp: Date.now(),
       });
       setSubmitted(true);
     } else {
