@@ -9,7 +9,7 @@ import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore"
 import Radar from 'radar-sdk-js';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBuilding } from "@fortawesome/free-solid-svg-icons";
-import trees from '../public/pine-trees.png'
+import trees from '../public/pine-trees.png';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -92,7 +92,6 @@ function InputForm() {
                   <input type="text" id="fullName" name="fullName" className={styles.input} style={{ paddingLeft: '38px', paddingTop: '9px', paddingBottom: '9px' }} required/>
                 </div>
                 <label htmlFor="address">address:</label>
-                <input type="hidden" id="address" name="address" className={styles.input} required/>
                 <AddressInput/>
                 <label htmlFor="aptNumber">apt #:</label>
                 <div className={styles.inputContainer}>
@@ -127,13 +126,23 @@ function AddressInput() {
       },
     });
 
+    autocompleteRef
+      .current
+      ?.inputField
+      .addEventListener("change", (e: Event) => { 
+        (document.getElementById('address') as HTMLInputElement).value = 
+          (e.currentTarget as HTMLInputElement).value;
+      });
+
     return () => {
         autocompleteRef.current?.remove();
     };
   }, []);
 
   return (
-    <div id="autocomplete"/>
+    <div id="autocomplete">
+      <input type="hidden" id="address" name="address" className={styles.input} required/>
+    </div>
   );
 }
 
@@ -142,10 +151,6 @@ export default function Home() {
     <>
       <Head>
         <title>Save the Date</title>
-        <meta property="og:image" content="<generated>" />
-        <meta property="og:image:type" content="<generated>" />
-        <meta property="og:image:width" content="<generated>" />
-        <meta property="og:image:height" content="<generated>" />
       </Head>
       <main className={styles.main}>
         <div className={styles.container}>
